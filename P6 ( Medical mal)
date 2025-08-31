@@ -1,0 +1,31 @@
+
+library(ggplot2)
+
+data <- read.csv("/Users/mohakmugulurmutt/Downloads/medicalmalpractice.csv")
+
+summary(data$Amount)
+
+p1<-ggplot(data, aes(x = log10(Amount))) +
+  geom_histogram(bins = 20, fill = "skyblue") +
+  labs(title = "Log-Scaled Claim Amounts", x = "Log10(Amount)", y = "Count")
+
+top3 <- names(sort(table(data$Specialty), decreasing = TRUE))[1:3]
+top3_data <- data[data$Specialty %in% top3, ]
+
+p2<-ggplot(top3_data, aes(x = Specialty, y = Amount, fill = Specialty)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  labs(title = "Claim Amounts for Top 3 Specialties", y = "Amount (log scale)")
+
+total_rows <- nrow(data)
+anesth_percent <- sum(data$Specialty == "Anesthesiology") / total_rows * 100
+derma_percent <- sum(data$Specialty == "Dermatology") / total_rows * 100
+ortho_percent <- sum(data$Specialty == "Orthopedic Surgery") / total_rows * 100
+
+cat("Anesthesiology: ", round(anesth_percent, 2), "%\n")
+cat("Dermatology: ", round(derma_percent, 2), "%\n")
+cat("Orthopedic Surgery: ", round(ortho_percent, 2), "%\n")
+
+cor.test(data$Age, data$Amount)
+print(p1)
+print(p2)
