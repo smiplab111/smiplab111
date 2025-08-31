@@ -1,0 +1,27 @@
+library(readr)
+library(dplyr)
+data <- read_csv("/Users/mohakmugulurmutt/Downloads/Patient_Satisfaction_Simulated.csv")
+summary(data)
+
+library(GGally)
+fitness <- read.csv("/Users/mohakmugulurmutt/Downloads/Fitness_Simulated.csv")
+
+numeric_data <- fitness[sapply(fitness, is.numeric)]
+
+p <- ggpairs(numeric_data)
+print(p)
+
+cor_matrix <- cor(numeric_data)
+print(cor_matrix)
+
+cor_matrix[lower.tri(cor_matrix, diag = TRUE)] <- NA
+cor_values <- as.data.frame(as.table(cor_matrix))
+cor_values <- na.omit(cor_values)
+
+strongest_pos <- cor_values[which.max(cor_values$Freq), ]
+strongest_neg <- cor_values[which.min(cor_values$Freq), ]
+
+cat("Strongest Positive Correlation:\n")
+print(strongest_pos)
+cat("\nStrongest Negative Correlation:\n")
+print(strongest_neg)
