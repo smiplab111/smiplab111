@@ -1,0 +1,17 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('https://raw.githubusercontent.com/Chinmay-Ankolekar/Stats-Lab/main/AusAntidiabeticDrug.csv')
+
+date = df['ds']
+sales = df['y']
+
+datetime = pd.to_datetime(date)
+
+
+plt.plot(datetime, sales)
+plt.xlabel("Time")
+plt.ylabel("sales")
+plt.title("Antidiabetic Drug Sales Over Time")
+plt.show()
