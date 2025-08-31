@@ -1,0 +1,23 @@
+library(ggplot2)
+
+da <- read.csv("/Users/mohakmugulurmutt/Downloads/baggagecomplaints.csv")
+
+summary(da)
+
+avg_complaints <- aggregate(Baggage ~ Airline, data = da, mean)
+
+selected <- da[da$Airline %in% c("Hawaiian", "American Eagle", "United"), ]
+
+yearly_avg <- aggregate(Baggage ~ Year + Airline, data = selected, mean)
+
+p <- ggplot(yearly_avg, aes(x = Year, y = Baggage, color = Airline)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  labs(
+    title = "Yearly Average Baggage Complaints",
+    x = "Year",
+    y = "Average Complaints"
+  ) +
+  theme_minimal()
+
+print(p)   # <-- This forces the plot to show if you're in console/terminal
