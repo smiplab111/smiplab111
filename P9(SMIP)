@@ -1,0 +1,9 @@
+import scipy.stats as stats 
+  
+smip_scores = [70, 46, 94, 34, 20, 86, 18, 12, 56, 64]
+dbms_scores = [60, 66, 90, 46, 16, 98, 24, 8, 32, 54] 
+ 
+correlation, p_value = stats.spearmanr(smip_scores, dbms_scores) 
+ 
+print(f"Spearman Rank Correlation Coefficient: {correlation:.4f}") 
+print(f"P-value: {p_value:.4f}") 
