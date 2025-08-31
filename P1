@@ -1,0 +1,11 @@
+data(mtcars)
+
+plot(mtcars$mpg,mtcars$hp,
+     main="Scatter Plot of MPG V/S HP",
+     xlab="HP",
+     ylab="MPG"
+     )
+
+correlation<-cor(mtcars$mpg,mtcars$hp,method="pearson")
+
+print(correlation)
