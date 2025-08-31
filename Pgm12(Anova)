@@ -1,0 +1,14 @@
+data(mtcars)
+head(mtcars)
+
+result_anova <- aov(Sepal.Length ~ Species, data = iris)
+summary(result_anova)
+
+setosa <- subset(iris, Species == "setosa")$Sepal.Length
+versicolor <- subset(iris, Species == "versicolor")$Sepal.Length
+
+result_wilcox <- wilcox.test(setosa, versicolor)
+result_wilcox
+
+result_kruskal <- kruskal.test(Sepal.Length ~ Species, data = iris)
+result_kruskal
