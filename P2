@@ -1,0 +1,13 @@
+
+data(mtcars)
+
+qqnorm(mtcars$mpg, main="Q-Q Plot for MPG")
+qqline(mtcars$mpg, col="red")
+
+
+qqnorm(mtcars$hp, main="Q-Q Plot for HP")
+qqline(mtcars$hp, col="red")
+
+
+correlation <- cor(mtcars$mpg, mtcars$hp, method="pearson")
+print(correlation)
